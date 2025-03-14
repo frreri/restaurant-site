@@ -1,0 +1,108 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.nav-bar {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  background-color: #f76707;
+  height: 8vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-container {
+  position: relative;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bar ul {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-bar li {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bar a:link,
+.nav-bar a:visited {
+  text-decoration: none;
+  color: #f8f9fa;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 400ms;
+}
+
+.nav-active-line {
+  width: 25%;
+  height: 6px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  position: absolute;
+  left: 0;
+  bottom: 15%;
+  transition: transform 500ms;
+}
+
+.header,
+.section {
+  min-height: 92vh;
+  scroll-margin-top: 8vh;
+}
+
+.header {
+  margin-top: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-h1 {
+  font-size: 10rem;
+  color: #f8f9fa;
+}
+
+.header-hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+    url('../img/meat_resized.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section-menu {
+  background-color: #212529;
+}
+
+.section-about {
+  background-color: #343a40;
+}
+
+.section-cart {
+  background-color: #495057;
+}
