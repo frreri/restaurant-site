@@ -12,13 +12,12 @@ body {
   position: fixed;
   width: 100vw;
   top: 0;
-  background-color: #212529;
   height: 8vh;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 600ms ease;
+  transition: background-color 500ms ease;
 }
 
 .nav-container {
@@ -56,7 +55,6 @@ body {
   display: inline-block;
   padding: 0.5rem;
   border-radius: 8px;
-  transition: all 400ms;
 }
 
 .nav-active-line {
@@ -77,11 +75,6 @@ body {
   align-items: center;
 }
 
-.section {
-  min-height: 93vh;
-  scroll-margin-top: 7vh;
-}
-
 .header-h1 {
   font-size: 10rem;
   color: #f8f9fa;
@@ -93,6 +86,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.section {
+  min-height: 93vh;
+  scroll-margin-top: 7vh;
 }
 
 .section-menu {
