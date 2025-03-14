@@ -31,16 +31,22 @@ export const initScrollingNav = () => {
       if (entity.isIntersecting) {
         if (entity.intersectionRect.height > window.innerHeight / 2) {
           let translateVal;
+          let navColor;
           if (targetId === 'home') {
             translateVal = 0;
+            navColor = 'rgba(0, 0, 0, 0)';
           } else if (targetId === 'menu') {
             translateVal = 100;
+            navColor = '#212529';
           } else if (targetId === 'about') {
             translateVal = 200;
+            navColor = '#343a40';
           } else {
             translateVal = 300;
+            navColor = '#495057';
           }
           navActiveLine.style.transform = `translateX(${translateVal}%)`;
+          navBar.style.backgroundColor = navColor;
         }
       }
     });

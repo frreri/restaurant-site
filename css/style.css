@@ -12,12 +12,13 @@ body {
   position: fixed;
   width: 100vw;
   top: 0;
-  background-color: #f76707;
+  background-color: #212529;
   height: 8vh;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 600ms ease;
 }
 
 .nav-container {
@@ -69,17 +70,16 @@ body {
   transition: transform 500ms;
 }
 
-.header,
-.section {
-  min-height: 92vh;
-  scroll-margin-top: 8vh;
-}
-
 .header {
-  margin-top: 8vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.section {
+  min-height: 93vh;
+  scroll-margin-top: 7vh;
 }
 
 .header-h1 {
