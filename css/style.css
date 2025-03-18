@@ -4,8 +4,16 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-color: #f8f9fa;
+  --bg-gray-1: #212529;
+  --bg-gray-2: #343a40;
+  --bg-gray-3: #495057;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+  color: var(--main-color);
 }
 
 .nav-bar {
@@ -46,7 +54,7 @@ body {
 .nav-bar a:link,
 .nav-bar a:visited {
   text-decoration: none;
-  color: #f8f9fa;
+  color: var(--main-color);
   font-weight: bold;
   font-size: 22px;
 }
@@ -61,7 +69,7 @@ body {
   width: 25%;
   height: 6px;
   border-radius: 8px;
-  background-color: #f8f9fa;
+  background-color: var(--main-color);
   position: absolute;
   left: 0;
   bottom: 15%;
@@ -77,7 +85,7 @@ body {
 
 .header-h1 {
   font-size: 10rem;
-  color: #f8f9fa;
+  color: var(--main-color);
 }
 
 .header-hero {
@@ -91,16 +99,47 @@ body {
 .section {
   min-height: 93vh;
   scroll-margin-top: 7vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section h2 {
+  font-size: 2rem;
 }
 
 .section-menu {
-  background-color: #212529;
+  background-color: var(--bg-gray-1);
 }
 
 .section-about {
-  background-color: #343a40;
+  background-color: var(--bg-gray-2);
 }
 
 .section-cart {
-  background-color: #495057;
+  background-color: var(--bg-gray-3);
+}
+
+/* FOOD SECTION */
+
+.food-container,
+.food-filters,
+.food-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.food-container,
+.food-items {
+  flex-direction: column;
+}
+
+.food-item {
+  width: 300px;
+  background-color: var(--bg-gray-2);
+  border-radius: 8px;
 }
