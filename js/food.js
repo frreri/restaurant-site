@@ -19,23 +19,11 @@ export const setupFoodLogic = async foodJson => {
     const desserts = foods.filter(foodFilter('dessert'));
     const drinks = foods.filter(foodFilter('drink'));
 
-    // menu event listeners
-    starterBtn.addEventListener('click', () => {
-      displayFoods(starters);
-      setActiveBtn(starterBtn, allBtns);
-    });
-    mainBtn.addEventListener('click', () => {
-      displayFoods(mains);
-      setActiveBtn(mainBtn, allBtns);
-    });
-    dessertBtn.addEventListener('click', () => {
-      displayFoods(desserts);
-      setActiveBtn(dessertBtn, allBtns);
-    });
-    drinkBtn.addEventListener('click', () => {
-      displayFoods(drinks);
-      setActiveBtn(drinkBtn, allBtns);
-    });
+    // setting menu event listeners
+    setMenuListener(starterBtn, starters, allBtns);
+    setMenuListener(mainBtn, mains, allBtns);
+    setMenuListener(dessertBtn, desserts, allBtns);
+    setMenuListener(drinkBtn, drinks, allBtns);
 
     // display starters by default
     displayFoods(starters);
@@ -46,14 +34,15 @@ export const setupFoodLogic = async foodJson => {
   }
 };
 
-const setActiveBtn = (activebtn, btnArr) => {
+const foodFilter = category => food => food.category === category;
+
+const setActiveBtn = (activeBtn, btnArr) => {
   btnArr.forEach(btn => btn.classList.remove('btn-menu--active'));
-  activebtn.classList.add('btn-menu--active');
+  activeBtn.classList.add('btn-menu--active');
 };
 
 const displayFoods = foodArr => {
   const foodContainer = document.querySelector('.food-items');
-
   foodContainer.innerHTML = '';
 
   foodArr.forEach((food, index) => {
@@ -65,4 +54,9 @@ const displayFoods = foodArr => {
   });
 };
 
-const foodFilter = category => food => food.category === category;
+const setMenuListener = (menuBtn, foodArr, allBtns) => {
+  menuBtn.addEventListener('click', () => {
+    displayFoods(foodArr);
+    setActiveBtn(menuBtn, allBtns);
+  });
+};
