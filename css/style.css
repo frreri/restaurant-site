@@ -122,24 +122,48 @@ body {
   background-color: var(--bg-gray-3);
 }
 
+.btn-menu {
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--main-color);
+  background-color: var(--bg-gray-2);
+  font-family: 'Roboto', sans-serif;
+}
+.btn-menu:hover {
+  background-color: var(--bg-gray-3);
+}
+
+.btn-menu--active {
+  background-color: var(--bg-gray-3);
+}
+
 /* FOOD SECTION */
 
 .food-container,
 .food-filters,
 .food-items {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
+}
+
+.food-filters {
+  justify-content: space-between;
+  width: 100%;
 }
 
 .food-container,
 .food-items {
   flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .food-item {
-  width: 300px;
+  width: 320px;
+  padding: 0.5rem;
   background-color: var(--bg-gray-2);
   border-radius: 8px;
 }

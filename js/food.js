@@ -7,6 +7,7 @@ export const setupFoodLogic = async foodJson => {
   const mainBtn = document.querySelector('.btn-mains');
   const dessertBtn = document.querySelector('.btn-desserts');
   const drinkBtn = document.querySelector('.btn-drinks');
+  const allBtns = [starterBtn, mainBtn, dessertBtn, drinkBtn];
 
   const order = [];
 
@@ -19,17 +20,35 @@ export const setupFoodLogic = async foodJson => {
     const drinks = foods.filter(foodFilter('drink'));
 
     // menu event listeners
-    starterBtn.addEventListener('click', () => displayFoods(starters));
-    mainBtn.addEventListener('click', () => displayFoods(mains));
-    dessertBtn.addEventListener('click', () => displayFoods(desserts));
-    drinkBtn.addEventListener('click', () => displayFoods(drinks));
+    starterBtn.addEventListener('click', () => {
+      displayFoods(starters);
+      setActiveBtn(starterBtn, allBtns);
+    });
+    mainBtn.addEventListener('click', () => {
+      displayFoods(mains);
+      setActiveBtn(mainBtn, allBtns);
+    });
+    dessertBtn.addEventListener('click', () => {
+      displayFoods(desserts);
+      setActiveBtn(dessertBtn, allBtns);
+    });
+    drinkBtn.addEventListener('click', () => {
+      displayFoods(drinks);
+      setActiveBtn(drinkBtn, allBtns);
+    });
 
     // display starters by default
     displayFoods(starters);
+    setActiveBtn(starterBtn, allBtns);
   } catch (err) {
     alert(err.message);
     console.log(err);
   }
+};
+
+const setActiveBtn = (activebtn, btnArr) => {
+  btnArr.forEach(btn => btn.classList.remove('btn-menu--active'));
+  activebtn.classList.add('btn-menu--active');
 };
 
 const displayFoods = foodArr => {
