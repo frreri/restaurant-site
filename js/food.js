@@ -46,9 +46,18 @@ const displayFoods = foodArr => {
   foodContainer.innerHTML = '';
 
   foodArr.forEach((food, index) => {
-    const foodItem = createElement('div', 'food-item', food.name);
+    const foodItem = createElement('div', 'food-item');
     foodItem.dataset.id = food.id;
     foodItem.dataset.index = index;
+
+    foodItem.append(createElement('h4', 'food-item-header', food.name));
+    foodItem.append(
+      createElement('p', 'food-item-description', food.description)
+    );
+
+    const foodPrice = createElement('p', 'food-item-price');
+    foodPrice.innerHTML = getPriceHtml(food);
+    foodItem.append(foodPrice);
 
     foodContainer.append(foodItem);
   });
@@ -59,4 +68,19 @@ const setMenuListener = (menuBtn, foodArr, allBtns) => {
     displayFoods(foodArr);
     setActiveBtn(menuBtn, allBtns);
   });
+};
+
+const getPriceHtml = foodItem => {
+  const currentHour = new Date().getHours();
+  let htmlString;
+  if (
+    currentHour > 10 &&
+    currentHour < 15 &&
+    foodItem.price !== foodItem.lunchPrice
+  ) {
+    htmlString = `${foodItem.lunchPrice}kr <span class="food-item-price--regular">${foodItem.price}kr</span>`;
+  } else {
+    htmlString = `${foodItem.price}kr`;
+  }
+  return htmlString;
 };
