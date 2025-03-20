@@ -149,7 +149,7 @@ const addToOrderListener = (
       const element = targetElement.closest('.food-item');
       const foodObject = foodArr.find(item => item.id == element.dataset.id);
       const cartBtn = document.querySelector('#cart-btn');
-      addAnimation(element, cartBtn, foodContainer);
+      addToCartAnim(element, cartBtn, foodContainer);
       orderArr.push(foodObject);
       setCartCount(orderArr.length);
       displayOrder(orderArr, orderContainer);
@@ -176,7 +176,7 @@ const handleOrderListener = (orderContainer, orderArr) => {
   });
 };
 
-const addAnimation = (sourceElement, targetElement, sourceContainer) => {
+const addToCartAnim = (sourceElement, targetElement, sourceContainer) => {
   const sourceElementPos = sourceElement.getClientRects()[0];
   const targetElementPos = targetElement.getClientRects()[0];
   const sourceElementCopy = sourceElement.cloneNode(true);
