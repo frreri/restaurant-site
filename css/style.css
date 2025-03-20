@@ -77,7 +77,8 @@ body {
   transition: transform 500ms;
 }
 
-.header {
+.header,
+.section {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -98,11 +99,6 @@ body {
 }
 
 .section {
-  min-height: 93vh;
-  scroll-margin-top: 7vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   gap: 1rem;
 }
