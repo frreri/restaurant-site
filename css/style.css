@@ -20,9 +20,9 @@ body {
   position: fixed;
   width: 100vw;
   top: 0;
-  height: 8vh;
-  min-height: 67px;
+  height: 74px;
   z-index: 3;
+  font-size: 1.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +57,6 @@ body {
   text-decoration: none;
   color: var(--main-color);
   font-weight: bold;
-  font-size: 22px;
 }
 
 .nav-btn {
@@ -333,6 +332,8 @@ body {
   color: var(--main-color);
   background-color: var(--bg-gray-3);
   cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
 }
 
 .btn-order-confirm:hover {
@@ -384,18 +385,35 @@ body {
 }
 
 @media only screen and (max-width: 478px) {
+  .nav-bar {
+    font-size: 1.5rem;
+  }
+
   .nav-container {
     width: 95%;
   }
-  /* .nav-active-line {
-    height: 4px;
-    bottom: 13%;
-  } */
+
   .header-h1 {
     font-size: 3rem;
   }
 
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
   .about-text-container {
     width: 80%;
+  }
+
+  .btn-menu {
+    font-size: 1rem;
+  }
+
+  .food-item {
+    width: 340px;
+  }
+
+  .btn-order-confirm {
+    font-size: 1rem;
   }
 }
