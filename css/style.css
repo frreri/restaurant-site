@@ -1,14 +1,14 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 :root {
   --main-color: #f8f9fa;
   --bg-gray-1: #212529;
   --bg-gray-2: #343a40;
   --bg-gray-3: #495057;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -344,6 +344,7 @@ body {
 }
 
 .order-toast {
+  z-index: 99;
   background-color: #2b8a3e;
   padding: 1rem 2rem;
   width: fit-content;
