@@ -51,7 +51,7 @@ const displayFoods = (foodArr, foodContainer) => {
   foodContainer.innerHTML = '';
 
   if (foodArr.length < 1) {
-    foodContainer.apend(createElement('p', null, 'No foods available'));
+    foodContainer.append(createElement('p', null, 'No foods available'));
     return;
   }
 
