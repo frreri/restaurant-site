@@ -5,9 +5,15 @@ export const setupLunchModal = () => {
   const overlay = document.querySelector('.overlay');
   const modal = document.querySelector('.modal');
 
+  const hideOnKeyPress = e => {
+    if (e.key === 'Escape') hideModal();
+    document.removeEventListener('keydown', hideOnKeyPress);
+  };
+
   const showModal = () => {
     modal.classList.remove('hidden');
     overlay.classList.remove('hidden');
+    document.addEventListener('keydown', hideOnKeyPress);
   };
 
   const hideModal = () => {

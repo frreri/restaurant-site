@@ -46,11 +46,11 @@ const displayFoods = foodArr => {
   foodContainer.innerHTML = '';
 
   foodArr.forEach((food, index) => {
-    const foodItem = createElement('div', 'food-item');
+    const foodItem = createElement('article', 'food-item');
     foodItem.dataset.id = food.id;
     foodItem.dataset.index = index;
 
-    foodItem.append(createElement('h4', 'food-item-header', food.name));
+    foodItem.append(createElement('h3', 'food-item-header', food.name));
     foodItem.append(
       createElement('p', 'food-item-description', food.description)
     );
