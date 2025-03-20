@@ -9,11 +9,11 @@ const getJsonData = async path => {
   }
 };
 
-const createElement = (tag, className, text) => {
-  const element = document.createElement(tag);
-  if (className) element.classList.add(className);
-  if (text) element.textContent = text;
-  return element;
+const createEl = (tag, className, text) => {
+  const el = document.createElement(tag);
+  if (className) el.classList.add(className);
+  if (text) el.textContent = text;
+  return el;
 };
 
-export { getJsonData, createElement };
+export { getJsonData, createEl };

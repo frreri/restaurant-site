@@ -172,6 +172,7 @@ body {
 
 .food-item {
   width: 320px;
+  min-height: 100px;
   padding: 0.8rem;
   background-color: var(--bg-gray-1);
   border-radius: 8px;

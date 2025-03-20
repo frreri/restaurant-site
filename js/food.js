@@ -1,6 +1,6 @@
 'use strict';
 
-import { getJsonData, createElement } from './helperFunctions.js';
+import { getJsonData, createEl } from './helperFunctions.js';
 
 export const setupFoodLogic = async foodJson => {
   const starterBtn = document.querySelector('.btn-starters');
@@ -51,24 +51,22 @@ const displayFoods = (foodArr, foodContainer) => {
   foodContainer.innerHTML = '';
 
   if (foodArr.length < 1) {
-    foodContainer.append(createElement('p', null, 'No foods available'));
+    foodContainer.append(createEl('p', null, 'No foods available'));
     return;
   }
 
   foodArr.forEach(food => {
-    const foodItem = createElement('article', 'food-item');
+    const foodItem = createEl('article', 'food-item');
     foodItem.dataset.id = food.id;
 
-    foodItem.append(createElement('h3', 'food-item-header', food.name));
-    foodItem.append(
-      createElement('p', 'food-item-description', food.description)
-    );
+    foodItem.append(createEl('h3', 'food-item-header', food.name));
+    foodItem.append(createEl('p', 'food-item-description', food.description));
 
-    const foodPrice = createElement('p', 'food-item-price');
+    const foodPrice = createEl('p', 'food-item-price');
     foodPrice.innerHTML = getPriceHtml(food);
     foodItem.append(foodPrice);
 
-    const addBtn = createElement('button', 'btn-order-add');
+    const addBtn = createEl('button', 'btn-order-add');
     addBtn.title = 'Add to order';
     addBtn.innerHTML =
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="add-icon"><path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" /></svg>';
@@ -82,19 +80,19 @@ const displayOrder = (orderArr, orderContainer) => {
   orderContainer.innerHTML = '';
 
   if (orderArr.length < 1) {
-    orderContainer.append(createElement('p', null, 'Your cart is empty'));
+    orderContainer.append(createEl('p', null, 'Your cart is empty'));
     return;
   }
   let totalCost = 0;
   const currHour = currentHour();
   orderArr.forEach((item, index) => {
-    const orderItem = createElement('article', 'order-item');
+    const orderItem = createEl('article', 'order-item');
     orderItem.dataset.index = index;
-    const orderTextString = createElement('p');
+    const orderTextString = createEl('p');
     orderTextString.innerHTML = `${item.name}, ${getPriceHtml(item)}`;
     orderItem.append(orderTextString);
 
-    const removeBtn = createElement('button', 'btn-order-remove');
+    const removeBtn = createEl('button', 'btn-order-remove');
     removeBtn.title = 'Remove from order';
     removeBtn.innerHTML =
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="remove-icon"><path fill-rule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" /></svg>';
@@ -104,12 +102,10 @@ const displayOrder = (orderArr, orderContainer) => {
     orderContainer.append(orderItem);
   });
 
-  const confirmContainer = createElement('div', 'order-confirm');
-  confirmContainer.append(createElement('p', null, `Total: ${totalCost}kr`));
+  const confirmContainer = createEl('div', 'order-confirm');
+  confirmContainer.append(createEl('p', null, `Total: ${totalCost}kr`));
 
-  confirmContainer.append(
-    createElement('button', 'btn-order-confirm', 'Confirm')
-  );
+  confirmContainer.append(createEl('button', 'btn-order-confirm', 'Confirm'));
   orderContainer.append(confirmContainer);
 };
 
@@ -144,12 +140,12 @@ const addToOrderListener = (
   orderContainer
 ) => {
   foodContainer.addEventListener('click', e => {
-    const targetElement = e.target;
-    if (targetElement.closest('.btn-order-add')) {
-      const element = targetElement.closest('.food-item');
-      const foodObject = foodArr.find(item => item.id == element.dataset.id);
+    const targetEl = e.target;
+    if (targetEl.closest('.btn-order-add')) {
+      const el = targetEl.closest('.food-item');
+      const foodObject = foodArr.find(item => item.id == el.dataset.id);
       const cartBtn = document.querySelector('#cart-btn');
-      addToCartAnim(element, cartBtn, foodContainer);
+      addToCartAnim(el, cartBtn, foodContainer);
       orderArr.push(foodObject);
       setCartCount(orderArr.length);
       displayOrder(orderArr, orderContainer);
@@ -159,15 +155,15 @@ const addToOrderListener = (
 
 const handleOrderListener = (orderContainer, orderArr) => {
   orderContainer.addEventListener('click', e => {
-    const targetElement = e.target;
-    if (targetElement.closest('.btn-order-remove')) {
-      const elementIndex = targetElement.closest('.order-item').dataset.index;
-      orderArr.splice(elementIndex, 1);
+    const targetEl = e.target;
+    if (targetEl.closest('.btn-order-remove')) {
+      const elIndex = targetEl.closest('.order-item').dataset.index;
+      orderArr.splice(elIndex, 1);
       setCartCount(orderArr.length);
       displayOrder(orderArr, orderContainer);
     }
 
-    if (targetElement.closest('.btn-order-confirm')) {
+    if (targetEl.closest('.btn-order-confirm')) {
       orderArr.splice(0, orderArr.length);
       setCartCount(orderArr.length);
       displayOrder(orderArr, orderContainer);
@@ -176,37 +172,37 @@ const handleOrderListener = (orderContainer, orderArr) => {
   });
 };
 
-const addToCartAnim = (sourceElement, targetElement, sourceContainer) => {
-  const sourceElementPos = sourceElement.getClientRects()[0];
-  const targetElementPos = targetElement.getClientRects()[0];
-  const sourceElementCopy = sourceElement.cloneNode(true);
-  sourceElementCopy.classList.add('add-to-cart-anim');
-  sourceElementCopy.style.top = sourceElementPos.top + 'px';
-  sourceElementCopy.style.left = sourceElementPos.left + 'px';
-  sourceContainer.append(sourceElementCopy);
+const addToCartAnim = (sourceEl, targetEl, sourceContainer) => {
+  const sourceElPos = sourceEl.getClientRects()[0];
+  const targetElPos = targetEl.getClientRects()[0];
+  const sourceElCopy = sourceEl.cloneNode(true);
+  sourceElCopy.classList.add('add-to-cart-anim');
+  sourceElCopy.style.top = sourceElPos.top + 'px';
+  sourceElCopy.style.left = sourceElPos.left + 'px';
+  sourceContainer.append(sourceElCopy);
   setTimeout(() => {
-    sourceElementCopy.style.top = targetElementPos.top + 'px';
-    sourceElementCopy.style.left = targetElementPos.left + 'px';
-    sourceElementCopy.style.transform = 'translate(-40%, -50%) scale(0)';
+    sourceElCopy.style.top = targetElPos.top + 'px';
+    sourceElCopy.style.left = targetElPos.left + 'px';
+    sourceElCopy.style.transform = 'translate(-40%, -50%) scale(0)';
     setTimeout(() => {
-      sourceElementCopy.remove();
+      sourceElCopy.remove();
     }, 400);
   }, 1);
 };
 
 const setCartCount = count => {
-  const countElement = document.querySelector('.cart-count');
-  countElement.textContent = count;
+  const countEl = document.querySelector('.cart-count');
+  countEl.textContent = count;
   if (count > 0) {
-    countElement.classList.remove('hidden');
+    countEl.classList.remove('hidden');
   } else {
-    countElement.classList.add('hidden');
+    countEl.classList.add('hidden');
   }
 };
 
 const toastOrder = () => {
-  const orderToast = createElement('div', 'order-toast');
-  orderToast.append(createElement('p', null, 'Order sent!'));
+  const orderToast = createEl('div', 'order-toast');
+  orderToast.append(createEl('p', null, 'Order sent!'));
   document.body.append(orderToast);
   setTimeout(() => {
     orderToast.style.opacity = 1;
