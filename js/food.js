@@ -28,7 +28,8 @@ export const setupFoodLogic = async foodJson => {
     menuListener(drinkBtn, drinks, allBtns, foodContainer);
 
     // setting order / cart eventlistener
-    addToOrderListener(foodContainer, foods, order);
+    addToOrderListener(foodContainer, foods, order, orderContainer);
+    handleOrderListener(orderContainer, order);
 
     // display starters by default
     displayFoods(starters, foodContainer);
@@ -49,7 +50,12 @@ const setActiveBtn = (activeBtn, btnArr) => {
 const displayFoods = (foodArr, foodContainer) => {
   foodContainer.innerHTML = '';
 
-  foodArr.forEach((food, index) => {
+  if (foodArr.length < 1) {
+    foodContainer.apend(createElement('p', null, 'No foods available'));
+    return;
+  }
+
+  foodArr.forEach(food => {
     const foodItem = createElement('article', 'food-item');
     foodItem.dataset.id = food.id;
 
@@ -63,6 +69,7 @@ const displayFoods = (foodArr, foodContainer) => {
     foodItem.append(foodPrice);
 
     const addBtn = createElement('button', 'btn-order-add');
+    addBtn.title = 'Add to order';
     addBtn.innerHTML =
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="add-icon"><path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" /></svg>';
     foodItem.append(addBtn);
@@ -73,14 +80,45 @@ const displayFoods = (foodArr, foodContainer) => {
 
 const displayOrder = (orderArr, orderContainer) => {
   orderContainer.innerHTML = '';
+
+  if (orderArr.length < 1) {
+    orderContainer.append(createElement('p', null, 'Your cart is empty'));
+    return;
+  }
+  let totalCost = 0;
+  const currHour = currentHour();
+  orderArr.forEach((item, index) => {
+    const orderItem = createElement('article', 'order-item');
+    orderItem.dataset.index = index;
+    const orderTextString = createElement('p');
+    orderTextString.innerHTML = `${item.name}, ${getPriceHtml(item)}`;
+    orderItem.append(orderTextString);
+
+    const removeBtn = createElement('button', 'btn-order-remove');
+    removeBtn.title = 'Remove from order';
+    removeBtn.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="remove-icon"><path fill-rule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" /></svg>';
+    orderItem.append(removeBtn);
+
+    totalCost += currHour > 10 && currHour < 15 ? item.lunchPrice : item.price;
+    orderContainer.append(orderItem);
+  });
+
+  const confirmContainer = createElement('div', 'order-confirm');
+  confirmContainer.append(createElement('p', null, `Total: ${totalCost}kr`));
+
+  confirmContainer.append(
+    createElement('button', 'btn-order-confirm', 'Confirm')
+  );
+  orderContainer.append(confirmContainer);
 };
 
 const getPriceHtml = foodItem => {
-  const currentHour = new Date().getHours();
+  const currHour = currentHour();
   let htmlString;
   if (
-    currentHour > 10 &&
-    currentHour < 15 &&
+    currHour > 10 &&
+    currHour < 15 &&
     foodItem.price !== foodItem.lunchPrice
   ) {
     htmlString = `${foodItem.lunchPrice}kr <span class="food-item-price--regular">${foodItem.price}kr</span>`;
@@ -90,6 +128,8 @@ const getPriceHtml = foodItem => {
   return htmlString;
 };
 
+const currentHour = () => new Date().getHours();
+
 const menuListener = (menuBtn, foodArr, allBtns, foodContainer) => {
   menuBtn.addEventListener('click', () => {
     displayFoods(foodArr, foodContainer);
@@ -97,7 +137,12 @@ const menuListener = (menuBtn, foodArr, allBtns, foodContainer) => {
   });
 };
 
-const addToOrderListener = (foodContainer, foodArr, orderArr) => {
+const addToOrderListener = (
+  foodContainer,
+  foodArr,
+  orderArr,
+  orderContainer
+) => {
   foodContainer.addEventListener('click', e => {
     const targetElement = e.target;
     if (targetElement.closest('.btn-order-add')) {
@@ -107,6 +152,26 @@ const addToOrderListener = (foodContainer, foodArr, orderArr) => {
       addAnimation(element, cartBtn, foodContainer);
       orderArr.push(foodObject);
       setCartCount(orderArr.length);
+      displayOrder(orderArr, orderContainer);
+    }
+  });
+};
+
+const handleOrderListener = (orderContainer, orderArr) => {
+  orderContainer.addEventListener('click', e => {
+    const targetElement = e.target;
+    if (targetElement.closest('.btn-order-remove')) {
+      const elementIndex = targetElement.closest('.order-item').dataset.index;
+      orderArr.splice(elementIndex, 1);
+      setCartCount(orderArr.length);
+      displayOrder(orderArr, orderContainer);
+    }
+
+    if (targetElement.closest('.btn-order-confirm')) {
+      orderArr.splice(0, orderArr.length);
+      setCartCount(orderArr.length);
+      displayOrder(orderArr, orderContainer);
+      toastOrder();
     }
   });
 };
@@ -131,11 +196,26 @@ const addAnimation = (sourceElement, targetElement, sourceContainer) => {
 
 const setCartCount = count => {
   const countElement = document.querySelector('.cart-count');
-  console.log(countElement);
   countElement.textContent = count;
   if (count > 0) {
     countElement.classList.remove('hidden');
   } else {
     countElement.classList.add('hidden');
   }
+};
+
+const toastOrder = () => {
+  const orderToast = createElement('div', 'order-toast');
+  orderToast.append(createElement('p', null, 'Order sent!'));
+  document.body.append(orderToast);
+  setTimeout(() => {
+    orderToast.style.opacity = 1;
+    orderToast.style.bottom = '30%';
+    setTimeout(() => {
+      orderToast.style.opacity = 0;
+      setTimeout(() => {
+        orderToast.remove();
+      }, 500);
+    }, 2000);
+  }, 1);
 };
