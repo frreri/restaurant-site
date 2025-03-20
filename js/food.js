@@ -8,6 +8,7 @@ export const setupFoodLogic = async foodJson => {
   const dessertBtn = document.querySelector('.btn-desserts');
   const drinkBtn = document.querySelector('.btn-drinks');
   const allBtns = [starterBtn, mainBtn, dessertBtn, drinkBtn];
+  const foodContainer = document.querySelector('.food-items');
 
   const order = [];
 
@@ -20,13 +21,16 @@ export const setupFoodLogic = async foodJson => {
     const drinks = foods.filter(foodFilter('drink'));
 
     // setting menu event listeners
-    setMenuListener(starterBtn, starters, allBtns);
-    setMenuListener(mainBtn, mains, allBtns);
-    setMenuListener(dessertBtn, desserts, allBtns);
-    setMenuListener(drinkBtn, drinks, allBtns);
+    menuListener(starterBtn, starters, allBtns, foodContainer);
+    menuListener(mainBtn, mains, allBtns, foodContainer);
+    menuListener(dessertBtn, desserts, allBtns, foodContainer);
+    menuListener(drinkBtn, drinks, allBtns, foodContainer);
+
+    // setting order / cart eventlistener
+    addToOrderListener(foodContainer, foods, order);
 
     // display starters by default
-    displayFoods(starters);
+    displayFoods(starters, foodContainer);
     setActiveBtn(starterBtn, allBtns);
   } catch (err) {
     alert(err.message);
@@ -41,14 +45,12 @@ const setActiveBtn = (activeBtn, btnArr) => {
   activeBtn.classList.add('btn-menu--active');
 };
 
-const displayFoods = foodArr => {
-  const foodContainer = document.querySelector('.food-items');
+const displayFoods = (foodArr, foodContainer) => {
   foodContainer.innerHTML = '';
 
   foodArr.forEach((food, index) => {
     const foodItem = createElement('article', 'food-item');
     foodItem.dataset.id = food.id;
-    foodItem.dataset.index = index;
 
     foodItem.append(createElement('h3', 'food-item-header', food.name));
     foodItem.append(
@@ -68,13 +70,6 @@ const displayFoods = foodArr => {
   });
 };
 
-const setMenuListener = (menuBtn, foodArr, allBtns) => {
-  menuBtn.addEventListener('click', () => {
-    displayFoods(foodArr);
-    setActiveBtn(menuBtn, allBtns);
-  });
-};
-
 const getPriceHtml = foodItem => {
   const currentHour = new Date().getHours();
   let htmlString;
@@ -88,4 +83,44 @@ const getPriceHtml = foodItem => {
     htmlString = `${foodItem.price}kr`;
   }
   return htmlString;
+};
+
+const menuListener = (menuBtn, foodArr, allBtns, foodContainer) => {
+  menuBtn.addEventListener('click', () => {
+    displayFoods(foodArr, foodContainer);
+    setActiveBtn(menuBtn, allBtns);
+  });
+};
+
+const addToOrderListener = (foodContainer, foodArr, orderArr) => {
+  foodContainer.addEventListener('click', e => {
+    const targetElement = e.target;
+    if (targetElement.closest('.btn-order-add')) {
+      const element = targetElement.closest('.food-item');
+      const foodObject = foodArr.find(item => item.id == element.dataset.id);
+      const cartBtn = document.querySelector('#cart-btn');
+      addAnimation(element, cartBtn, foodContainer);
+      orderArr.push(foodObject);
+      console.log(orderArr);
+    }
+  });
+};
+
+const addAnimation = (sourceElement, targetElement, sourceContainer) => {
+  const sourceElementPos = sourceElement.getClientRects()[0];
+  const targetElementPos = targetElement.getClientRects()[0];
+  const sourceElementCopy = sourceElement.cloneNode(true);
+  sourceElementCopy.classList.add('add-to-cart-anim');
+  sourceElementCopy.style.top = sourceElementPos.top + 'px';
+  sourceElementCopy.style.left = sourceElementPos.left + 'px';
+  sourceContainer.append(sourceElementCopy);
+  console.log(sourceElementCopy);
+  setTimeout(() => {
+    sourceElementCopy.style.top = targetElementPos.top + 'px';
+    sourceElementCopy.style.left = targetElementPos.left + 'px';
+    sourceElementCopy.style.transform = 'translate(-40%, -50%) scale(0)';
+    setTimeout(() => {
+      sourceElementCopy.remove();
+    }, 400);
+  }, 1);
 };
