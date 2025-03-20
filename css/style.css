@@ -22,7 +22,7 @@ body {
   top: 0;
   height: 8vh;
   min-height: 67px;
-
+  z-index: 3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -231,6 +231,25 @@ body {
   position: fixed;
   z-index: 4;
   transition: all 300ms linear;
+}
+
+#cart-btn {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(60%, -20%);
+  top: 0;
+  right: 0;
+  font-size: 0.8rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bg-gray-3);
 }
 
 .info-icon {

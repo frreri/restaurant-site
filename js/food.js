@@ -9,6 +9,7 @@ export const setupFoodLogic = async foodJson => {
   const drinkBtn = document.querySelector('.btn-drinks');
   const allBtns = [starterBtn, mainBtn, dessertBtn, drinkBtn];
   const foodContainer = document.querySelector('.food-items');
+  const orderContainer = document.querySelector('.order-container');
 
   const order = [];
 
@@ -70,6 +71,10 @@ const displayFoods = (foodArr, foodContainer) => {
   });
 };
 
+const displayOrder = (orderArr, orderContainer) => {
+  orderContainer.innerHTML = '';
+};
+
 const getPriceHtml = foodItem => {
   const currentHour = new Date().getHours();
   let htmlString;
@@ -101,6 +106,7 @@ const addToOrderListener = (foodContainer, foodArr, orderArr) => {
       const cartBtn = document.querySelector('#cart-btn');
       addAnimation(element, cartBtn, foodContainer);
       orderArr.push(foodObject);
+      setCartCount(orderArr.length);
     }
   });
 };
@@ -121,4 +127,15 @@ const addAnimation = (sourceElement, targetElement, sourceContainer) => {
       sourceElementCopy.remove();
     }, 400);
   }, 1);
+};
+
+const setCartCount = count => {
+  const countElement = document.querySelector('.cart-count');
+  console.log(countElement);
+  countElement.textContent = count;
+  if (count > 0) {
+    countElement.classList.remove('hidden');
+  } else {
+    countElement.classList.add('hidden');
+  }
 };
