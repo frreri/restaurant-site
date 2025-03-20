@@ -406,6 +406,10 @@ body {
     width: 80%;
   }
 
+  .modal {
+    padding: 2rem;
+  }
+
   .btn-menu {
     font-size: 1rem;
   }
