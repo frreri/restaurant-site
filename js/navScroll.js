@@ -32,10 +32,10 @@ export const initScrollingNav = () => {
           if (targetId === 'home') {
             translateVal = 0;
             navColor = 'rgba(0, 0, 0, 0)';
-          } else if (targetId === 'menu') {
+          } else if (targetId === 'about') {
             translateVal = 100;
             navColor = '#212529';
-          } else if (targetId === 'about') {
+          } else if (targetId === 'menu') {
             translateVal = 200;
             navColor = '#343a40';
           } else {

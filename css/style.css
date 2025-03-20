@@ -111,11 +111,10 @@ body {
   font-size: 2rem;
 }
 
-.section-menu {
+.section-about {
   background-color: var(--bg-gray-1);
 }
-
-.section-about {
+.section-menu {
   background-color: var(--bg-gray-2);
 }
 
@@ -130,7 +129,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   color: var(--main-color);
-  background-color: var(--bg-gray-2);
+  background-color: var(--bg-gray-1);
   font-family: 'Roboto', sans-serif;
 }
 .btn-menu:hover {
@@ -168,7 +167,7 @@ body {
 .food-item {
   width: 320px;
   padding: 0.8rem;
-  background-color: var(--bg-gray-2);
+  background-color: var(--bg-gray-1);
   border-radius: 8px;
 }
 
