@@ -1,7 +1,4 @@
 'use strict';
-//////////////////////
-// SCROLLING & NAV //
-/////////////////////
 
 export const initScrollingNav = () => {
   const smoothScroll = e => {
