@@ -210,7 +210,7 @@ const toastOrder = () => {
   document.body.append(orderToast);
   setTimeout(() => {
     orderToast.style.opacity = 1;
-    orderToast.style.bottom = '30%';
+    orderToast.style.bottom = '20%';
     setTimeout(() => {
       orderToast.style.opacity = 0;
       setTimeout(() => {
