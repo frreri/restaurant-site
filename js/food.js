@@ -101,7 +101,6 @@ const addToOrderListener = (foodContainer, foodArr, orderArr) => {
       const cartBtn = document.querySelector('#cart-btn');
       addAnimation(element, cartBtn, foodContainer);
       orderArr.push(foodObject);
-      console.log(orderArr);
     }
   });
 };
@@ -114,7 +113,6 @@ const addAnimation = (sourceElement, targetElement, sourceContainer) => {
   sourceElementCopy.style.top = sourceElementPos.top + 'px';
   sourceElementCopy.style.left = sourceElementPos.left + 'px';
   sourceContainer.append(sourceElementCopy);
-  console.log(sourceElementCopy);
   setTimeout(() => {
     sourceElementCopy.style.top = targetElementPos.top + 'px';
     sourceElementCopy.style.left = targetElementPos.left + 'px';
