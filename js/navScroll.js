@@ -1,6 +1,6 @@
 'use strict';
 
-export const initScrollingNav = () => {
+export const setupScrollingNav = () => {
   const smoothScroll = e => {
     e.preventDefault();
 

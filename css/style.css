@@ -122,6 +122,19 @@ body {
   background-color: var(--bg-gray-3);
 }
 
+/* ABOUT SECTION */
+
+.about-text-container {
+  width: 40%;
+  line-height: 1.5;
+}
+
+.about-text-container p {
+  margin-bottom: 1rem;
+}
+
+/* FOOD SECTION */
+
 .btn-menu {
   border: none;
   padding: 0.4rem 0.8rem;
@@ -139,8 +152,6 @@ body {
 .btn-menu--active {
   background-color: var(--bg-gray-3);
 }
-
-/* FOOD SECTION */
 
 .food-container,
 .food-filters,
@@ -186,6 +197,52 @@ body {
   margin-left: 0.2rem;
 }
 
+.info-icon {
+  width: 24px;
+  height: 24px;
+  /* cursor: pointer; */
+  /* fill: var(--bg-gray-1); */
+}
+
+.btn-lunch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.overlay {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  z-index: 6;
+  min-width: 320px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 3rem;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-gray-2);
+  border-radius: 8px;
+}
+
+.modal p {
+  line-height: 1.5;
+  margin: 0.5rem 0;
+}
+
 @media only screen and (max-width: 1024px) {
   .nav-container {
     width: 50%;
@@ -193,6 +250,10 @@ body {
 
   .header-h1 {
     font-size: 7rem;
+  }
+
+  .about-text-container {
+    width: 60%;
   }
 }
 
@@ -203,6 +264,10 @@ body {
 
   .header-h1 {
     font-size: 4.5rem;
+  }
+
+  .about-text-container {
+    width: 70%;
   }
 }
 
@@ -216,5 +281,9 @@ body {
   } */
   .header-h1 {
     font-size: 3rem;
+  }
+
+  .about-text-container {
+    width: 80%;
   }
 }
