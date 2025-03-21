@@ -178,8 +178,8 @@ const handleOrderListener = (orderContainer, orderArr) => {
 };
 
 const addToCartAnim = (sourceEl, targetEl, sourceContainer) => {
-  const sourceElPos = sourceEl.getClientRects()[0];
-  const targetElPos = targetEl.getClientRects()[0];
+  const sourceElPos = sourceEl.getBoundingClientRect();
+  const targetElPos = targetEl.getBoundingClientRect();
   const sourceElCopy = sourceEl.cloneNode(true);
   sourceElCopy.classList.add('add-to-cart-anim');
   sourceElCopy.style.top = sourceElPos.top + 'px';
