@@ -167,11 +167,11 @@ body {
 }
 
 .food-items {
-  min-height: 360px;
+  min-height: 375px;
 }
 
 .food-item {
-  width: 320px;
+  width: 340px;
   min-height: 100px;
   padding: 0.8rem;
   background-color: var(--bg-gray-1);
@@ -396,6 +396,10 @@ body {
 
   .header-h1 {
     font-size: 3rem;
+  }
+
+  .section {
+    scroll-margin-top: 2vh;
   }
 
   .section h2 {

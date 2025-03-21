@@ -21,7 +21,7 @@
     "id": 102,
     "name": "Steak Tartar",
     "description": "Steak tartar of swedish beef from local farm, 80g",
-    "allergens": "Red meat, Egg",
+    "allergens": "Egg",
     "price": 145,
     "lunchPrice": 145,
     "category": "starter"
@@ -30,7 +30,7 @@
     "id": 200,
     "name": "Ribeye Steak",
     "description": "300g beef, served with chili béarnaise and fries",
-    "allergens": "Red meat, Egg, Milk",
+    "allergens": "Egg, Milk",
     "price": 245,
     "lunchPrice": 235,
     "category": "main"
@@ -39,7 +39,7 @@
     "id": 201,
     "name": "Tenderloin Steak",
     "description": "250g beef, served with secret sauce and fries",
-    "allergens": "Red meat, Soy",
+    "allergens": "Soy",
     "price": 285,
     "lunchPrice": 275,
     "category": "main"
@@ -48,7 +48,7 @@
     "id": 202,
     "name": "Venison",
     "description": "Fillet of venison, served with mushrooms, caramelized onion and fries",
-    "allergens": "Red meat, Fungi",
+    "allergens": "Fungi",
     "price": 325,
     "lunchPrice": 315,
     "category": "main"
@@ -75,7 +75,7 @@
     "id": 302,
     "name": "Mudcake",
     "description": "Chocolate mudcake with whipped cream",
-    "allergens": "Red meat, Fungi",
+    "allergens": "Fungi",
     "price": 115,
     "lunchPrice": 115,
     "category": "dessert"

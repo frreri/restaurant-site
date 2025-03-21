@@ -61,6 +61,11 @@ const displayFoods = (foodArr, foodContainer) => {
 
     foodItem.append(createEl('h3', 'food-item-header', food.name));
     foodItem.append(createEl('p', 'food-item-description', food.description));
+    if (food.allergens) {
+      foodItem.append(
+        createEl('p', 'food-item-description', `Allergens: ${food.allergens}`)
+      );
+    }
 
     const foodPrice = createEl('p', 'food-item-price');
     foodPrice.innerHTML = getPriceHtml(food);
