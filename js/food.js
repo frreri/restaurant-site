@@ -103,7 +103,7 @@ const displayOrder = (orderArr, orderContainer) => {
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="remove-icon"><path fill-rule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" /></svg>';
     orderItem.append(removeBtn);
 
-    totalCost += currHour > 10 && currHour < 15 ? item.lunchPrice : item.price;
+    totalCost += currHour > 10 && currHour < 14 ? item.lunchPrice : item.price;
     orderContainer.append(orderItem);
   });
 
@@ -119,7 +119,7 @@ const getPriceHtml = foodItem => {
   let htmlString;
   if (
     currHour > 10 &&
-    currHour < 15 &&
+    currHour < 14 &&
     foodItem.price !== foodItem.lunchPrice
   ) {
     htmlString = `${foodItem.lunchPrice}kr <span class="food-item-price--regular">${foodItem.price}kr</span>`;
